@@ -1,0 +1,123 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(uv sync)",
+      "Bash(uv run pytest *)",
+      "Bash(uv run ruff *)",
+      "Bash(uv run python src/*)",
+      "Bash(uv run python .claude/skills/*)",
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "WebFetch(domain:code.claude.com)",
+      "WebFetch(domain:docs.databricks.com)",
+      "WebSearch",
+      "WebFetch(domain:arxiv.org)",
+      "WebFetch(domain:scikit-learn.org)",
+      "WebFetch(domain:lifelines.readthedocs.io)",
+      "WebFetch(domain:scikit-survival.readthedocs.io)",
+      "WebFetch(domain:imbalanced-learn.org)",
+      "WebFetch(domain:mlflow.org)",
+      "WebFetch(domain:dl.acm.org)",
+      "WebFetch(domain:ieeexplore.ieee.org)",
+      "WebFetch(domain:jmlr.org)",
+      "WebFetch(domain:www.kaggle.com)"
+    ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(run_in_background:true)",
+      "Bash(uv run python .claude/skills/deploy/scripts/*)"
+    ],
+    "deny": [
+      "Read(~/.databrickscfg)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./data/raw/**)",
+      "Bash(rm -rf *)",
+      "Bash(nohup *)",
+      "Bash(setsid *)",
+      "Bash(databricks serving-endpoints delete *)",
+      "Bash(curl * | sh)",
+      "Read(~/.kaggle/**)"
+    ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "filesystem": {
+      "denyRead": [
+        "~/.databrickscfg",
+        "~/.ssh",
+        "~/.aws",
+        "~/.kaggle"
+      ]
+    },
+    "network": {
+      "allowedDomains": [
+        "pypi.org",
+        "files.pythonhosted.org",
+        "*.cloud.databricks.com",
+        "*.azuredatabricks.net",
+        "*.gcp.databricks.com",
+        "www.kaggle.com",
+        "storage.googleapis.com",
+        "api.openml.org",
+        "www.openml.org"
+      ]
+    }
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/protect-files.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/guard-databricks.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/format-python.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/require-tests.sh"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat \"$CLAUDE_PROJECT_DIR\"/reports/eval_gate.json 2>/dev/null; sed -n '/## Decisões para este projeto/,/## Perguntas/p' \"$CLAUDE_PROJECT_DIR\"/reports/research.md 2>/dev/null || true"
+          }
+        ]
+      }
+    ]
+  }
+}
