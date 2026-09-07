@@ -1,0 +1,189 @@
+{
+  "shape": [
+    306613,
+    11
+  ],
+  "dtypes": {
+    "step": "int32",
+    "type": "category",
+    "amount": "float64",
+    "nameOrig": "string",
+    "oldbalanceOrg": "float64",
+    "newbalanceOrig": "float64",
+    "nameDest": "string",
+    "oldbalanceDest": "float64",
+    "newbalanceDest": "float64",
+    "isFraud": "int8",
+    "isFlaggedFraud": "int8"
+  },
+  "nulls": {
+    "step": 0,
+    "type": 0,
+    "amount": 0,
+    "nameOrig": 0,
+    "oldbalanceOrg": 0,
+    "newbalanceOrig": 0,
+    "nameDest": 0,
+    "oldbalanceDest": 0,
+    "newbalanceDest": 0,
+    "isFraud": 0,
+    "isFlaggedFraud": 0
+  },
+  "duplicates": 0,
+  "positives": 6613,
+  "fraud_rate": 0.02156790481812578,
+  "fraud_rate_by_type": {
+    "CASH_IN": {
+      "mean": 0.0,
+      "sum": 0,
+      "count": 66092
+    },
+    "CASH_OUT": {
+      "mean": 0.03046,
+      "sum": 3316,
+      "count": 108863
+    },
+    "DEBIT": {
+      "mean": 0.0,
+      "sum": 0,
+      "count": 1917
+    },
+    "PAYMENT": {
+      "mean": 0.0,
+      "sum": 0,
+      "count": 101411
+    },
+    "TRANSFER": {
+      "mean": 0.116378,
+      "sum": 3297,
+      "count": 28330
+    }
+  },
+  "fraud_rate_by_time_window": {
+    "(0.401, 60.9]": {
+      "mean": 0.014218,
+      "sum": 714.0,
+      "count": 50219.0
+    },
+    "(60.9, 120.8]": {
+      "mean": 0.284302,
+      "sum": 690.0,
+      "count": 2427.0
+    },
+    "(120.8, 180.7]": {
+      "mean": 0.013713,
+      "sum": 642.0,
+      "count": 46817.0
+    },
+    "(180.7, 240.6]": {
+      "mean": 0.011979,
+      "sum": 673.0,
+      "count": 56181.0
+    },
+    "(240.6, 300.5]": {
+      "mean": 0.015845,
+      "sum": 682.0,
+      "count": 43042.0
+    },
+    "(300.5, 360.4]": {
+      "mean": 0.011404,
+      "sum": 616.0,
+      "count": 54014.0
+    },
+    "(360.4, 420.3]": {
+      "mean": 0.018311,
+      "sum": 724.0,
+      "count": 39540.0
+    },
+    "(420.3, 480.2]": {
+      "mean": 0.226275,
+      "sum": 608.0,
+      "count": 2687.0
+    },
+    "(480.2, 540.1]": {
+      "mean": 0.131127,
+      "sum": 642.0,
+      "count": 4896.0
+    },
+    "(540.1, 600.0]": {
+      "mean": 0.091605,
+      "sum": 622.0,
+      "count": 6790.0
+    }
+  },
+  "amount_quantiles": {
+    "fraud": {
+      "0.01": 1996.17,
+      "0.1": 36359.57,
+      "0.25": 128426.58,
+      "0.5": 446032.95,
+      "0.75": 1503034.86,
+      "0.9": 4256401.486,
+      "0.99": 10000000.0
+    },
+    "legit": {
+      "0.01": 453.6091,
+      "0.1": 4490.116,
+      "0.25": 13387.425,
+      "0.5": 75387.645,
+      "0.75": 209281.4825,
+      "0.9": 366927.553,
+      "0.99": 1613284.7691
+    }
+  },
+  "zero_balance_rate": {
+    "oldbalanceOrg": {
+      "fraud": 0.004990170875548163,
+      "legit": 0.33172666666666667
+    },
+    "newbalanceOrig": {
+      "fraud": 0.9839709662785423,
+      "legit": 0.5679166666666666
+    },
+    "oldbalanceDest": {
+      "fraud": 0.6476636927264479,
+      "legit": 0.42443333333333333
+    },
+    "newbalanceDest": {
+      "fraud": 0.4970512626644488,
+      "legit": 0.3828
+    }
+  },
+  "dest_accounts": {
+    "unique_total": 251940,
+    "with_fraud": 6579,
+    "with_more_than_one_fraud": 34,
+    "max_frauds_one_account": 2
+  },
+  "abs_corr_with_target_top10": {
+    "amount": 0.2573,
+    "step": 0.0639,
+    "newbalanceOrig": 0.036,
+    "oldbalanceOrg": 0.0355,
+    "isFlaggedFraud": 0.0344,
+    "oldbalanceDest": 0.0241,
+    "newbalanceDest": 0.001
+  },
+  "leakage_suspects": [
+    "isFlaggedFraud"
+  ],
+  "constant_columns": [],
+  "impossible_values": {
+    "amount_le_0": 8
+  },
+  "survival": {
+    "n": 2676208,
+    "events": 6579,
+    "censoring_rate": 0.9975416709015144,
+    "km_median": null,
+    "km_survival_at": {
+      "24": 0.998307294696734,
+      "168": 0.9978695595834295,
+      "336": 0.9975698308509958
+    }
+  },
+  "figures": [
+    "reports\\eda_figures\\amount_by_class.png",
+    "reports\\eda_figures\\fraud_rate_by_step.png"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "task": "classification",
+  "passed": true,
+  "best_run_id": "e9072c3674e74b51ad25dabf72576d02",
+  "model": "hgb_calibrated",
+  "checks": {
+    "pr_auc": {
+      "value": 0.9893309027857605,
+      "min": 0.8,
+      "ok": true
+    },
+    "recall_at_p90": {
+      "value": 0.981875,
+      "min": 0.6,
+      "ok": true
+    },
+    "neg_brier": {
+      "value": -0.0012596560073693057,
+      "min": -0.002,
+      "ok": true
+    }
+  },
+  "runs_considered": 6,
+  "decision_rule": "expected_value: p_hat * amount > fp_cost (nao ha tau global)",
+  "threshold_run_id": "e9072c3674e74b51ad25dabf72576d02",
+  "fp_cost": 15.0,
+  "expected_cost": {
+    "n_transactions": 103573,
+    "n_reviewed": 7250,
+    "n_false_negatives": 8,
+    "n_false_positives": 5658,
+    "fn_cost_total": 0.0,
+    "fp_cost_total": 84870.0,
+    "total_cost": 84870.0,
+    "avg_cost_per_transaction": 0.8194220501482047,
+    "fp_cost_unit": 15.0
+  }
+}

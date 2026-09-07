@@ -1,0 +1,14 @@
+{
+  "task": "survival",
+  "passed": false,
+  "best_run_id": "d9b57fbe992749a2af48b36761947e49",
+  "model": "coxph",
+  "checks": {
+    "c_index": {
+      "value": 0.6578104074328697,
+      "min": 0.7,
+      "ok": false
+    }
+  },
+  "runs_considered": 2
+}

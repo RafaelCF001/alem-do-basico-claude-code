@@ -1,7 +1,7 @@
 ---
 name: eda
 description: Análise exploratória orientada a fraude — desbalanceamento, drift temporal, agregações por conta, censura para sobrevivência, leakage; números vêm de script determinístico, o Claude interpreta
-argument-hint: [foco opcional, ex. "survival" ou "por tipo de transação"]
+argument-hint: "foco opcional, ex. survival ou por tipo de transação"
 model: haiku
 allowed-tools: Read Bash(uv run python *) Edit(./reports/**)
 ---
